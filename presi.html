@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      img { height: 80%; width: 100%; }
+      .left-column60 {
+      width: 60%;
+      float: left;
+      }
+      .right-column40 {
+      width: 40%;
+      float: right;
+      }
+  </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Summary of ICFP and Haskell Sympo 2015
+### Michał J. Gajda
+
+## Presented on Haskell.SG
+
+### Sep 22nd 2015
+
+---
+
+# Strengths of functional programming in 2015
+
+### Haskell
+#### is now _language family_: Agda, BlueSpec, Curry, Disciple, Elm, Frege, Idris, Jaskell, Roy, Ωmega...
+#### shining new tools...
+
+### Compilers and EDSLs
+
+### Sexy types
+#### types, contracts, static safety, verification, proving
+
+---
+ 
+# Shining new tools in Haskell-land
+
+#### API annotations
+#### Speeding up parallel datatypes with hardware transactions
+#### _Stack_ to be included in Haskell Platform
+#### Prettier-printer from Idris people
+#### Towards more dependent types
+#### [Deja Fu](http://dl.acm.org/authorize?N91384)
+#### [Efficient communication and collection with compact normal forms](http://dl.acm.org/authorize?N92852)
+
+---
+
+# EDSLs and compilers
+
+#### [SQL to C in 500 lines of code](http://dl.acm.org/authorize?N92722)
+#### [Hygienic resugaring of compositional desugaring](http://dl.acm.org/authorize?N92738)
+#### [Pilsner: a compositionally verified compiler for a higher-order imperative language](http://dl.acm.org/authorize?N92746)
+#### [Generating performance portable code using rewrite rules: from high-level functional expressions to high-performance OpenCL code](http://dl.acm.org/authorize?N92749)
+#### [Program synthesis: opportunities for the next decade](http://dl.acm.org/authorize?N92721)
+#### [A fast compiler for NetKAT](http://dl.acm.org/authorize?N92859)
+#### [Certified symbolic management of financial multi-party contracts](http://dl.acm.org/authorize?N92858)
+#### [Guilt Free Ivory](http://dl.acm.org/authorize?N91398)
+#### [Type-safe Runtime Code Generation: Accelerate to LLVM](http://dl.acm.org/authorize?N91399)
+
+---
+
+# Types, oh so sexy
+
+.left-column60[
+## Nifty datatypes and type classes
+## Error finding by type checking
+## Application specific types and classes
+## More safety
+]
+
+.right-column40[![Type image](hourglass.jpg)]
+
+---
+
+# Nifty datatypes
+### [Freer Monads, More Extensible Effects](http://dl.acm.org/authorize?N91380)
+### [The Remote Monad Design Pattern](http://dl.acm.org/authorize?N91387)
+### [Practical principled FRP: forget the past, change the future, FRPNow!](http://dl.acm.org/authorize?N92857)
+### [Practical probabilistic programming with monads](http://dl.acm.org/authorize?N91396)
+### [Variations on Variants](http://dl.acm.org/authorize?N91388)
+### [RRB vector: a practical general purpose immutable sequence](http://dl.acm.org/authorize?N92850)
+
+---
+
+# Error finding by type checking
+
+#### TypeError class proposal - lightning talk
+```
+class TypeError a b where
+  typeError a b = error "a and be cannot be unified"
+
+instance TypeError (Field s v) (Field s w) where
+  typeError a b = error $ "Field " &lt;&gt; showTypeOf (labelType a)
+               &lt;&gt; " has mismatching types " &lt;&gt; showTypeOf (valueType a)
+               &lt;&gt; " and "                   &lt;&gt; showTypeOf (valueType b)
+      
+showTypeOf :: a -&gt; String
+labelType :: Field label a -&gt; label
+valueType :: Field a value -&gt; value
+```
+#### [GADTs meet their match: pattern-matching warnings that account for GADTs, guards, and laziness](http://dl.acm.org/authorize?N92867)
+#### [Blame assignment for higher-order contracts with intersection and union](http://dl.acm.org/authorize?N92853)
+#### [Practical SMT-based type error localization](http://dl.acm.org/authorize?N92866)
+
+---
+
+# Type-level programming
+
+### [Injective Type Families for Haskell](http://dl.acm.org/authorize?N91382)
+### [Type Families with Class, Type Classes with Family](http://dl.acm.org/authorize?N91383)
+### [Quick fix on Co-monads](http://dl.acm.org/authorize?N91381)
+
+---
+ 
+# Types - application specific
+
+### Application specific types:
+#### [Functional pearl: two can keep a secret, if one of them uses haskell](http://dl.acm.org/authorize?N92855)
+#### [A Typechecker Plugin for Units of Measure](http://dl.acm.org/authorize?N91372)
+#### [Improving Haskell Types with SMT](http://dl.acm.org/authorize?N91372)
+#### [Embedding a Full Linear Lambda Calculus in Haskell](http://dl.acm.org/authorize?N91397)
+#### [HLIO: mixing static and dynamic typing for information-flow control in haskell](http://dl.acm.org/authorize?N92856)
+#### [Bridging the GUI Gap with Reactive Values and Relations](http://dl.acm.org/authorize?N91386)
+
+---
+ 
+# Types - safety and verification
+
+### [Bounded refinement types](http://dl.acm.org/authorize?N92736)
+### [Functional programming and hardware design: still interesting after all these years](http://dl.acm.org/authorize?N92745)
+### Complexity and termination analysis as challenging subject
+
+---
+
+# Haskell now...
+
+## Grows and gets a _family_
+## Gets job as an _expert_ in:
+### _DSLs_
+### _compilation_
+## Goes crazy about _types_ and static checking
+
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    <!---script src="remark/src/remark.js"--->
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
