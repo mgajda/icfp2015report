@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      img { height: 80%; width: 100%; }
+      .left-column60 {
+      width: 60%;
+      float: left;
+      }
+      .right-column40 {
+      width: 40%;
+      float: right;
+      }
+  </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Highlights at ICFP 2015
+### aka: Talks I still remember...
+### Sönke Hahn
+
+## Presented on Haskell.SG
+
+### Sep 22nd 2015
+
+---
+
+# Session Types for Rust
+
+https://github.com/Munksgaard/session-types
+
+https://www.youtube.com/watch?v=0wDSjpx1Wz0
+
+``` rust
+type Id = String;
+type Atm = Recv<Id, Choose<Rec<AtmInner>, Eps>>;
+
+type AtmInner = Offer<AtmDeposit,
+                Offer<AtmWithdraw,
+                Offer<AtmBalance,
+                      Eps>>>;
+
+type AtmDeposit = Recv<u64, Send<u64, Var<Z>>>;
+type AtmWithdraw = Recv<u64, Choose<Var<Z>, Var<Z>>>;
+type AtmBalance = Send<u64, Var<Z>>;
+
+type Client = <Atm as HasDual>::Dual;
+```
+
+---
+
+# A Typechecker Plugin for Units of Measure
+
+http://hackage.haskell.org/package/uom-plugin
+
+https://www.youtube.com/watch?v=0wDSjpx1Wz0
+
+``` haskell
+{-# OPTIONS_GHC -fplugin Data.UnitsOfMeasure.Plugin #-}
+```
+
+--
+
+``` haskell
+>>> :type [u| 5 m |]
+[u| 5 m |] :: Quantity Int (Base "m")
+>>> :type [u| 5 m / s |]
+[u| 5 m / s |] :: Quantity Int (Base "m" /: Base "s")
+>>> 2 *: [u| 5 m |]
+[u| 10 m |]
+>>> [u| 2 m / s |] +: [u| 5 m / s |]
+[u| 7 m / s |]
+>>> [u| 3 m |] -: [u| 1 s |]
+--  Couldn't match type ‘Base "s"’ with ‘Base "m"’...
+```
+
+--
+
+Allows for unit polymorphism:
+``` haskell
+>>> let f x y = (x *: y) +: (y *: x)
+>>> :t f
+f :: Num a => Quantity a v -> Quantity a u -> Quantity a (u *: v)
+```
+
+---
+
+# An Introduction to Type-Level and Generic Programming in Haskell
+
+http://hackage.haskell.org/package/generics-sop
+
+---
+
+# PureScript Front-end Development
+
+http://www.purescript.org/:
+
+> PureScript is a small strongly typed programming language that compiles to JavaScript.
+
+---
+
+# Web Programming with Servant
+
+https://haskell-servant.github.io/
+
+https://www.youtube.com/watch?v=vXRIXkbjLbU
+
+---
+
+# Diagrams -- A Functional EDSL for Vector Graphics
+
+http://projects.haskell.org/diagrams
+
+http://projects.haskell.org/diagrams/gallery.html
+
+---
+
+# Coping with change: data schema migration in Haskell
+
+http://hackage.haskell.org/package/api-tools
+
+http://hackage.haskell.org/package/api-tools-0.5.2/docs/Data-API-Tutorial.html
+
+---
+
+# Fighting spam with Haskell at Facebook
+
+http://hackage.haskell.org/package/haxl
+
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    <!---script src="remark/src/remark.js"--->
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
